@@ -35,7 +35,7 @@ class Index extends StatelessWidget {
                   height: 50,
                   width: size.width,
                 ),
-                 Image(
+                Image(
                   image: NetworkImage(
                       "https://s.isanook.com/ca/0/ud/185/926754/7437_20100917p1.jpg"),
                   width: size.width * 0.8,
@@ -76,7 +76,10 @@ class Index extends StatelessWidget {
                       fontSize: 20,
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    print("Helloworld");
+                    Navigator.pushNamed(context, 'Login');
+                  },
                 ),
                 SizedBox(
                   height: 20,
@@ -93,7 +96,10 @@ class Index extends StatelessWidget {
                       fontSize: 20,
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                     print("Helloworld");
+                    Navigator.pushNamed(context, 'Register');
+                  },
                 ),
               ],
             )
