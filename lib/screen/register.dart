@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:mobileappweek1/backend/database.dart';
 import 'package:mobileappweek1/config/constant.dart';
 
 class Register extends StatefulWidget {
@@ -19,24 +22,24 @@ class _RegisterState extends State<Register> {
           title: Text('Register'),
         ),
         body: Form(
-            key: formKey,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  txtName(),
-                  txtSurname(),
-                  txtEmail(),
-                  txtPassword(),
-                  btnSubmit(),
-                ],
-              ),
+          key: formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                txtName(),
+                txtSurname(),
+                txtEmail(),
+                txtPassword(),
+                btnSubmit(),
+              ],
             ),
-            ),
+          ),
+        ),
       ),
     );
   }
 
- Widget txtName() {
+  Widget txtName() {
     return Container(
       margin: EdgeInsets.fromLTRB(15, 20, 15, 20),
       child: TextFormField(
@@ -62,7 +65,7 @@ class _RegisterState extends State<Register> {
       ),
     );
   }
-  
+
   Widget txtSurname() {
     return Container(
       margin: EdgeInsets.fromLTRB(15, 20, 15, 20),
@@ -76,7 +79,7 @@ class _RegisterState extends State<Register> {
           icon: Icon(Icons.add_reaction_sharp),
           hintText: 'Input your name',
         ),
-         validator: (value) {
+        validator: (value) {
           if (value!.isEmpty) {
             return 'กรุณากรอกข้อมูล';
           }
@@ -87,7 +90,7 @@ class _RegisterState extends State<Register> {
       ),
     );
   }
-  
+
   Widget txtEmail() {
     return Container(
       margin: EdgeInsets.fromLTRB(15, 20, 15, 20),
@@ -143,12 +146,20 @@ class _RegisterState extends State<Register> {
         ),
         onPressed: () {
           print("Hello");
+           var local = new DBLocal();
+
           if (formKey.currentState!.validate()) {
+            formKey.currentState!.save();
+            local.register(name, surname, email, password);
+            formKey.currentState!.reset();
+            Navigator.pushNamed(context, 'Login');
+          }
+          /* if (formKey.currentState!.validate()) {
             formKey.currentState!.save();
             print(
                 "Name : $name Surname : $surname Emai : $email Password : $password ");
             formKey.currentState!.reset();
-          }
+          }*/
         },
         child: Text('Submit'),
       );
